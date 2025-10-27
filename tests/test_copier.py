@@ -68,3 +68,14 @@ def test_environment_file(copie, copier_project_defaults):
         "workflow", "envs", "environment.yaml").read_text()
     assert 'name: my_project' in content
     assert 'python=3.10' in content
+
+
+def test_changelog(copie, copier_project_defaults):
+    # create project
+    project_defaults = copier_project_defaults
+    project = copie.copy(extra_answers=project_defaults)
+
+    # test changelog file
+    assert os.path.exists(os.path.join(project.project_dir, "CHANGELOG.md"))
+
+
