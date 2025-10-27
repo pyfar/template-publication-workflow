@@ -1,0 +1,27 @@
+# Welcome to {{ project_name }}
+
+{{ project_name }} is a [snakemake](https://snakemake.readthedocs.io/) workflow designed to follow the FAIR principles.
+
+## Get started
+
+You can create a local environment, e.g. using conda like this:
+
+
+```bash
+$ conda env create -f workflow/envs/environment.yaml
+```
+
+## Workflow
+
+You can create a graph representing the workflow by e.g.
+
+```bash
+$ snakemake --rulegraph | dot -Tpng > rulegraph.png
+```
+
+than execute the workflow
+
+```bash
+% snakemake --cores 1 -p -n
+```
+
