@@ -57,3 +57,14 @@ def test_license_default(copie, copier_project_defaults):
     assert 'MIT License' in content
     assert '2024 author' in content
 
+
+def test_environment_file(copie, copier_project_defaults):
+    # create project
+    project_defaults = copier_project_defaults
+    project = copie.copy(extra_answers=project_defaults)
+
+    # test environment file
+    content = project.project_dir.joinpath(
+        "workflow", "envs", "environment.yaml").read_text()
+    assert 'name: my_project' in content
+    assert 'python=3.10' in content
