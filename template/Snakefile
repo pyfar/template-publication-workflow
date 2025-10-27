@@ -1,0 +1,14 @@
+# This file defines the main Snakefile for the workflow
+# it includes configuration and workflow Snakefiles
+# the targets are defined in the rule all below.
+
+# include config file
+configfile: "config.yaml"
+
+# include workflow files
+include: "workflow/Snakefile"
+
+# define rule all
+rule all:
+    output:
+        # add your final targets here
