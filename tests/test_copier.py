@@ -29,6 +29,8 @@ def test_project_folder(copie, copier_project_defaults):
     "LICENSE",
     "CHANGELOG.md",
     ".gitignore",
+    "Snakefile",
+    "config/config.yaml",
 ])
 def test_generated_file_exists(copie, copier_project_defaults, file_name):
     # create project
