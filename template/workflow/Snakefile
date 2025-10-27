@@ -1,4 +1,0 @@
-
-
-# include rules from rules/ directory
-include: "rules/**"
