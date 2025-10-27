@@ -54,6 +54,11 @@ license:
         "Intermediate - MPL-2.0": "MPL-2.0"
     default: MIT
 
+project_slug:
+    when: "{{ template_mode == 'custom' }}"
+    type: str
+    help: "What is the project slug? Used in hyperlinks."
+    default: "{{ project_name|lower|replace(' ', '-') }}"
 
 dev_platform:
     type: str
