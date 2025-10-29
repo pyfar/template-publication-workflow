@@ -1,6 +1,7 @@
 name: {{project_slug}}
 channels:
   - conda-forge
+  - bioconda
 dependencies:
   - python={{python_version}}
   - pip
@@ -9,12 +10,9 @@ dependencies:
   - scipy
   - matplotlib
   - ipython
+  - ipykernel
+  - ipympl
+  - snakemake
   - pip:
-    - snakemake
-    - ipykernel
-    - ipympl
-    - numpy
     - pyfar
-    - sofar
-    - pyrato
 
