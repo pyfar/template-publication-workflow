@@ -1,0 +1,92 @@
+# questions
+project_name:
+    type: str
+    help: What is your project name?
+
+package_description:
+    type: str
+    multiline: true
+    help: "Please provide a short description for the package."
+
+author_name:
+    type: str
+    help: "Who is the author of the package? Used in the package description."
+    default: "{{ copyright_holder }}"
+
+author_email:
+    type: str
+    help: "The author's email address. Used in the package description."
+
+copyright_holder:
+    type: str
+    help: "Who is the copyright holder, for example, yourself or your organization? Used in the license file and project description."
+    default: "{{ author_name }}"
+
+year:
+    type: str
+    help: "What is the starting year of the project? Used in copyright statements."
+    default: "{{ '%Y' | strftime }}"
+
+python_version:
+    type: str
+    help: Which Python version do you want to use?
+    choices:
+      - "3.10"
+      - "3.11"
+      - "3.12"
+      - "3.13"
+      - "3.14"
+
+license:
+    when: "{{ template_mode == 'custom' }}"
+    type: str
+    help: |
+        Which license do you want to use? Includes a LICENSE file in the repository root.
+        For more information, see:
+        - https://www.pyopensci.org/python-package-guide/documentation/repository-files/license-files.html
+        - https://opensource.org/licenses
+    choices:
+        "Permissive - MIT": "MIT"
+        "Permissive - BSD-3-Clause": "BSD-3-Clause"
+        "Permissive - Apache-2.0": "Apache-2.0"
+        "Copyleft - GPL-3.0": "GPL-3.0-only"
+        "Copyleft - EUPL-1.2": "EUPL-1.2"
+        "Intermediate - MPL-2.0": "MPL-2.0"
+    default: MIT
+
+project_slug:
+    when: "{{ template_mode == 'custom' }}"
+    type: str
+    help: "What is the project slug? Used in hyperlinks."
+    default: "{{ project_name|lower|replace(' ', '-') }}"
+
+dev_platform:
+    type: str
+    help: "Which development platform are you planning to use? Used in documentation links."
+    choices:
+        - "GitHub"
+        - "GitLab"
+    default: "GitHub"
+
+username:
+    when: "{{ use_git }}"
+    type: str
+    help: "Provide you or your organization's {{ dev_platform }} username. Used to generate certain documentation and hyperlinks."
+
+dev_platform_url:
+    type: str
+    when: false
+    default: "https://{{ dev_platform|lower }}.com"
+
+version:
+    type: str
+    default: 0.1.0
+    help: "Enter the version of the Python package"
+    validator: >-
+            {% if not (version | regex_search('^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$')) %}
+            Package version should use Semantic Versioning 2.0.0 (MAJOR.MINOR.PATCH)
+            {% endif %}
+
+
+_subdirectory: "template"
+
