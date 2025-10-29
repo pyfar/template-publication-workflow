@@ -59,3 +59,28 @@ def test_license_default(copie, copier_project_defaults):
     assert 'MIT License' in content
     assert '2024 author' in content
 
+
+@pytest.mark.parametrize(('license_short', 'expected_content'), [
+    ("MIT", "MIT License"),
+    ("CC-BY-4.0", "Attribution 4.0 International"),
+    ("CC-BY-NC-4.0", "Attribution-NonCommercial 4.0 International"),
+    (
+        "CC-BY-NC-ND-4.0",
+        "Attribution-NonCommercial-NoDerivatives 4.0 International"),
+    (
+        "CC-BY-NC-SA-4.0",
+        "Attribution-NonCommercial-ShareAlike 4.0 International"),
+    ("CC-BY-ND-4.0", "Attribution-NoDerivatives 4.0 International"),
+    ("CC-BY-SA-4.0", "Attribution-ShareAlike 4.0 International"),
+])
+def test_license_all_license_files(
+        copie, copier_project_defaults, license_short, expected_content):
+    # create project
+    project_defaults = copier_project_defaults
+    project_defaults["license"] = license_short
+    project = copie.copy(extra_answers=project_defaults)
+
+    # test LICENSE file content
+    content = project.project_dir.joinpath("LICENSE").read_text()
+    assert expected_content in content
+
