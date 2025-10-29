@@ -39,7 +39,7 @@ def test_generated_file_exists(copie, copier_project_defaults, file_name):
     project = copie.copy(extra_answers=project_defaults)
 
     # test generated file
-    assert os.path.exists(os.path.join(project.project_dir, file_name))
+    assert project.project_dir.joinpath(file_name).exists()
 
 
 def test_readme(copie, copier_project_defaults):
