@@ -7,12 +7,10 @@ import shutil
 def copier_project_defaults():
     return {
         "project_name": "my_project",
-        "package_description": "my_project",
+        "project_description": "my_project_description",
         "author_name": "author",
-        "author_email": "author@example.com",
         "python_version": "3.10",
         "license": "MIT",
-        "username": "pyfar",
         "version": "0.1.0",
         "year": "2024",
         }
@@ -49,7 +47,8 @@ def test_readme(copie, copier_project_defaults):
 
     # test README file content
     content = project.project_dir.joinpath("README.md").read_text()
-    assert '# Welcome to my_project' in content
+    assert '# my_project' in content
+    assert 'my_project_description' in content
 
 
 def test_license_default(copie, copier_project_defaults):

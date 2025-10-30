@@ -1,25 +1,21 @@
 # questions
 project_name:
     type: str
-    help: What is your project name?
+    help: What is your project name? Used in the project README.
 
-package_description:
+project_description:
     type: str
     multiline: true
-    help: "Please provide a short description for the package."
+    help: "Please provide a short description for the project. Used in the project README."
 
 author_name:
     type: str
-    help: "Who is the author of the package? Used in the package description."
+    help: "Who is the author of the project? Used in the project README."
     default: "{{ copyright_holder }}"
-
-author_email:
-    type: str
-    help: "The author's email address. Used in the package description."
 
 copyright_holder:
     type: str
-    help: "Who is the copyright holder, for example, yourself or your organization? Used in the license file and project description."
+    help: "Who is the copyright holder, for example, yourself or your organization? Used in copyright statements."
     default: "{{ author_name }}"
 
 year:
@@ -38,13 +34,13 @@ python_version:
       - "3.14"
 
 license:
-    when: "{{ template_mode == 'custom' }}"
     type: str
     help: |
         Which license do you want to use? Includes a LICENSE file in the repository root.
         For more information, see:
         - https://www.pyopensci.org/python-package-guide/documentation/repository-files/license-files.html
         - https://opensource.org/licenses
+        - https://creativecommons.org/share-your-work/cclicenses/
     choices:
         "Permissive - MIT": "MIT"
         "Permissive - BSD-3-Clause": "BSD-3-Clause"
@@ -61,33 +57,14 @@ license:
     default: MIT
 
 project_slug:
-    when: "{{ template_mode == 'custom' }}"
     type: str
-    help: "What is the project slug? Used in hyperlinks."
+    help: "What is the project slug (all-lowercase name)? For example used to create an environment of that name."
     default: "{{ project_name|lower|replace(' ', '-') }}"
-
-dev_platform:
-    type: str
-    help: "Which development platform are you planning to use? Used in documentation links."
-    choices:
-        - "GitHub"
-        - "GitLab"
-    default: "GitHub"
-
-username:
-    when: "{{ use_git }}"
-    type: str
-    help: "Provide you or your organization's {{ dev_platform }} username. Used to generate certain documentation and hyperlinks."
-
-dev_platform_url:
-    type: str
-    when: false
-    default: "https://{{ dev_platform|lower }}.com"
 
 version:
     type: str
     default: 0.1.0
-    help: "Enter the version of the Python package"
+    help: "Enter the initial version of the project."
     validator: >-
             {% if not (version | regex_search('^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$')) %}
             Package version should use Semantic Versioning 2.0.0 (MAJOR.MINOR.PATCH)
