@@ -16,16 +16,16 @@ To use this template:
     pip install copier
     ```
 
-2. Run the below copier command to create a target directory at `path_to_target`.
+2. Run the below copier command to create a target directory at `path_to_target_folder`.
    Note: copier will overwrite files in the given directory, if it already exists.
 
     ```console
-    copier copy https://github.com/pyfar/template-publication-workflow path_to_target
+    copier copy https://github.com/pyfar/template-publication-workflow path_to_target_folder
     ```
 
-3. Open the README in the created project directory to get started with your project.
+3. Open the *README.md* in the created project directory to get started with your project.
 
 
 # Contributing
 
-Check out the [contributing guidelines](https://pyfar.readthedocs.io/en/stable/contributing.html) if you want to become part of pyfar.
+Check out [pyfar.org](https://pyfar-gallery.readthedocs.io/en/latest/contribute/index.html) if you want to become part of pyfar.
