@@ -2,6 +2,7 @@ import os
 import pytest
 import subprocess
 import shutil
+import json
 
 @pytest.fixture(scope='session')
 def copier_project_defaults():
@@ -130,3 +131,32 @@ def test_conda_env_create_dry_run(copie, copier_project_defaults):
             f"stdout: {exc.stdout}\n"
             f"stderr: {exc.stderr}",
         )
+
+
+@pytest.mark.parametrize("add_zenodo", [True, False])
+def test_add_zenodo_file(copie, copier_project_defaults, add_zenodo):
+    # create project
+    project_defaults = copier_project_defaults
+    project_defaults["add_zenodo"] = add_zenodo
+    project = copie.copy(extra_answers=project_defaults)
+
+    # test .zenodo.json file existence
+    assert project.project_dir.joinpath(".zenodo.json").exists() == add_zenodo
+    assert project.project_dir.joinpath(
+        '.github', 'workflows','next_steps_zenodo_issue.md',
+        ).exists() == add_zenodo
+
+
+def test_zenodo_file_content(copie, copier_project_defaults):
+    # create project
+    project_defaults = copier_project_defaults
+    project_defaults["add_zenodo"] = True
+    project = copie.copy(extra_answers=project_defaults)
+
+    # test .zenodo.json file content
+    content = json.load(project.project_dir.joinpath(".zenodo.json").open())
+    assert content["title"] == "author"
+    assert content["version"] == "0.1.0"
+    assert content["license"] == "MIT"
+    assert content["creators"][0]["affiliation"] == "author"
+    assert content["creators"][0]["name"] == "author"

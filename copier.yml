@@ -93,6 +93,27 @@ version:
             Package version should use Semantic Versioning 2.0.0 (MAJOR.MINOR.PATCH)
             {% endif %}
 
+add_zenodo:
+    type: bool
+    help: "Do you want to add a Zenodo configuration file (.zenodo.json) to the template?"
+    default: true
+
+orcid:
+    when: "{{ add_zenodo }}"
+    type: str
+    help: "What is your ORCID iD? Used in the Zenodo configuration file."
+    default: "0000-0000-0000-0000"
+    validator: >-
+            {% if not (orcid | regex_search('^\d{4}-\d{4}-\d{4}-\d{3}[\dX]$')) %}
+            ORCID iD should be in the format XXXX-XXXX-XXXX-XXXX
+            {% endif %}
+
+zenodo_title:
+    when: "{{ add_zenodo }}"
+    type: str
+    help: "What is the title of your Zenodo publication? Used in the Zenodo configuration file."
+    default: "{{ project_name }}"
+
 
 _subdirectory: "template"
 
