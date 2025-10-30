@@ -14,10 +14,15 @@ except NameError:
     snakemake_exists = False
 
 if not snakemake_exists:
-    output_file = os.path.join('results', 'example.rir.sofa')
-
+    output_file = os.path.join('..', '..', 'resources', 'shoebox_room_receiver_2_2.5_1.5.rir.sofa')
+    r_x, r_y, r_z = 3, 2.5, 1.5  # in meters
 else:
     output_file = snakemake.output[0]
+    r_x = snakemake.params.receiver_position_x
+    r_y = snakemake.params.receiver_position_y
+    r_z = snakemake.params.receiver_position_z
+
+
 
 # %%
 # Create output folder
@@ -49,7 +54,7 @@ room_impulse_response = rectangular_room_rigid_walls(
     max_freq=3e3,
     speed_of_sound=speed_of_sound,
     samplingrate=sampling_rate,
-    n_samples=2**12,
+    n_samples=2**14,
 )[0]
 
 noise_power = np.max(np.abs(room_impulse_response.time), axis=-1) * 10**(-60/20)
@@ -78,7 +83,8 @@ sofa.inspect()
 # check out the documentation of the sofa convention to first fill the data
 # https://sofar.readthedocs.io/en/stable/resources/conventions.html#generalfir-1-0
 
-sofa.Data_IR = room_impulse_response.time[np.newaxis, :, :]
+sofa.Data_IR = noisy_room_impulse_response.time[np.newaxis, :, :]
+sofa.Data_SamplingRate = noisy_room_impulse_response.sampling_rate
 
 # %%
 # Fill metadata
