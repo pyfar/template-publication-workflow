@@ -66,12 +66,6 @@ awgn = pf.signals.noise(
 noisy_room_impulse_response = room_impulse_response + awgn
 
 # %%
-# SOFA is a standard format to store spatial acoustic data, such as
-# room impulse responses (RIRs). Here you can find an overview of
-# the SOFA standards https://www.sofaconventions.org/
-
-# we use sofar (https://sofar.readthedocs.io/) to create and write SOFA files
-# and create a GeneralFIR SOFA object to store the RIR and required metadata.
 sofa = sf.Sofa('GeneralFIR')
 
 # %%
