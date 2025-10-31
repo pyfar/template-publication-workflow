@@ -14,8 +14,8 @@ except NameError:
     snakemake_exists = False
 
 if not snakemake_exists:
-    input_file = os.path.join('..', '..', 'resources', 'shoebox_room_receiver_3_2.5_1.5.rir.sofa')
-    output_file = os.path.join('..', '..', 'results', 'shoebox_room_receiver_3_2.5_1.5.rt30.sofa')
+    input_file = os.path.join('..', '..', 'resources', 'ShoeboxRoom_receiver_3_2_1.rir.sofa')
+    output_file = os.path.join('..', '..', 'results', 'ShoeboxRoom_receiver_3_2_1.rt30.csv')
     rt = '30'
 
 else:
@@ -58,41 +58,12 @@ edc = pr.energy_decay_curve_chu(rir_octave, channel_independent=True)
 # Calculate the reverberation time
 
 reverberation_time = pr.reverberation_time_linear_regression(edc, T=f'T{rt}')
-print(reverberation_time)
-reverberation_time = pf.FrequencyData(reverberation_time, center_frequencies)
-
 
 # %%
-# Create SOFA object
-sofa_out = sf.Sofa('GeneralTF')
+# write reverberation time to disk
 
-# %%
-# A first impression of the data can be obtained with
+data_write = np.vstack((center_frequencies, reverberation_time))
 
-sofa_out.inspect()
-
-# %%
-# Fill SOFA Data
-# check out the documentation of the sofa convention to first fill the data
-# https://sofar.readthedocs.io/en/stable/resources/conventions.html#generaltf-1-0
-
-sofa_out.Data_Real = np.real(reverberation_time.freq[np.newaxis, :])
-sofa_out.Data_Imag = np.imag(reverberation_time.freq[np.newaxis, :])
-sofa_out.N = center_frequencies
-
-# %%
-# fill metadata
-# next check out the required and optional metadata for the GeneralTF convention
-# and fill them accordingly
-
-
-# %%
-# check if sofa data are consistent and meet the standard
-sofa_out.verify()
-
-
-# %%
-# write sofa file
-sf.write_sofa(output_file, sofa_out)
+np.savetxt(output_file, data_write)
 
 # %%

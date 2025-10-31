@@ -2,7 +2,7 @@
 
 rule plot_single_frequency_data:
     input:
-        "results/{filename}.rt{rt}.sofa"
+        "results/{filename}.rt{rt}.csv"
     output:
         "figures/{filename}.rt{rt}.{postfix}"
     log:

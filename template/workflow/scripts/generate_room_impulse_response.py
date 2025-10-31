@@ -14,7 +14,7 @@ except NameError:
     snakemake_exists = False
 
 if not snakemake_exists:
-    output_file = os.path.join('..', '..', 'resources', 'shoebox_room_receiver_2_2.5_1.5.rir.sofa')
+    output_file = os.path.join('..', '..', 'resources', 'ShoeboxRoom_receiver_3_2_1.rir.sofa')
     r_x, r_y, r_z = 3, 2, 1  # in meters
 else:
     output_file = snakemake.output[0]

@@ -4,7 +4,7 @@ rule calculate_reverberation_time:
     input:
         "resources/{filename}.rir.sofa"
     output:
-        "results/{filename}.rt{rt}.sofa"
+        "results/{filename}.rt{rt}.csv"
     params:
         rt="{rt}"  # which decay time to calculate (e.g., 60 for RT60)
     log:
