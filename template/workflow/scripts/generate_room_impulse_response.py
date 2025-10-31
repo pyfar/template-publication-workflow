@@ -15,12 +15,12 @@ except NameError:
 
 if not snakemake_exists:
     output_file = os.path.join('..', '..', 'resources', 'ShoeboxRoom_receiver_3_2_1.rir.sofa')
-    r_x, r_y, r_z = 3, 2, 1  # in meters
+    receiver_x, receiver_y, receiver_z = 3, 2, 1  # in meters
 else:
     output_file = snakemake.output[0]
-    r_x = float(snakemake.params.receiver_position_x)
-    r_y = float(snakemake.params.receiver_position_y)
-    r_z = float(snakemake.params.receiver_position_z)
+    receiver_x = float(snakemake.params.receiver_position_x)
+    receiver_y = float(snakemake.params.receiver_position_y)
+    receiver_z = float(snakemake.params.receiver_position_z)
 
 
 # %%
@@ -32,7 +32,7 @@ os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
 room_dimensions = [7, 4, 3]  # in meters
 source_position = [6, 1.5, 1.8]  # in meters
-receiver_position = [r_x, r_y, r_z]  # in meters
+receiver_position = [receiver_x, receiver_y, receiver_z]  # in meters
 
 assert all(0 < v1 < v2 for v1, v2 in zip(receiver_position, room_dimensions)), \
     "Receiver position must be inside the room."
@@ -59,11 +59,11 @@ room_impulse_response = rectangular_room_rigid_walls(
 )[0]
 
 noise_power = np.max(np.abs(room_impulse_response.time), axis=-1) * 10**(-60/20)
-awgn = pf.signals.noise(
+noise = pf.signals.noise(
     room_impulse_response.n_samples, spectrum='white', rms=noise_power,
     sampling_rate=room_impulse_response.sampling_rate)
 
-noisy_room_impulse_response = room_impulse_response + awgn
+noisy_room_impulse_response = room_impulse_response + noise
 
 # %%
 sofa = sf.Sofa('GeneralFIR')

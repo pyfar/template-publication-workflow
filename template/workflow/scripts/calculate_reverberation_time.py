@@ -31,7 +31,8 @@ os.makedirs(os.path.dirname(output_file), exist_ok=True)
 # Load RIR and convert from SOFA format
 sofa = sf.read_sofa(input_file)
 
-rir, source_positions, receiver_positions = pf.io.convert_sofa(sofa)
+room_impulse_response, source_positions, receiver_positions = pf.io.convert_sofa(
+    sofa)
 
 # %%
 # Octave band filtering
@@ -42,8 +43,8 @@ center_frequencies = pf.dsp.filter.fractional_octave_frequencies(
     frequency_range=frequency_range,
     )[0]
 
-rir_octave = pf.dsp.filter.fractional_octave_bands(
-    rir,
+room_impulse_response_octave = pf.dsp.filter.fractional_octave_bands(
+    room_impulse_response,
     num_fractions=num_octave_fractions,
     frequency_range=frequency_range,
 )[:, 0, 0]
@@ -51,12 +52,14 @@ rir_octave = pf.dsp.filter.fractional_octave_bands(
 # %%
 # Calculate energy decay curves
 
-edc = pr.energy_decay_curve_chu(rir_octave, channel_independent=True)
+energy_decay_curve = pr.energy_decay_curve_chu(
+    room_impulse_response_octave, channel_independent=True)
 
 # %%
 # Calculate the reverberation time
 
-reverberation_time = pr.reverberation_time_linear_regression(edc, T=f'T{rt}')
+reverberation_time = pr.reverberation_time_linear_regression(
+    energy_decay_curve, T=f'T{rt}')
 
 # %%
 # write reverberation time to disk
