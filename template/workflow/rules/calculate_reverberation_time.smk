@@ -8,7 +8,7 @@ rule calculate_reverberation_time:
     params:
         rt="{rt}"  # which decay time to calculate (e.g., 60 for RT60)
     log:
-        "logs/calculate_reverberation_time{filename}.rt{rt}.log"
+        "logs/calculate_reverberation_time.{filename}.rt{rt}.log"
     conda:
         "../envs/environment.yaml"
     script:

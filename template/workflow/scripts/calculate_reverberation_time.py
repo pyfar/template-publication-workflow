@@ -28,13 +28,13 @@ else:
 os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
 # %%
-# Load example RIR
+# Load RIR and convert from SOFA format
 sofa = sf.read_sofa(input_file)
 
 rir, source_positions, receiver_positions = pf.io.convert_sofa(sofa)
 
 # %%
-# Third-octave band filtering
+# Octave band filtering
 frequency_range = (100, 1e3)
 num_octave_fractions = 1
 center_frequencies = pf.dsp.filter.fractional_octave_frequencies(
@@ -74,7 +74,7 @@ sofa_out.inspect()
 # %%
 # Fill SOFA Data
 # check out the documentation of the sofa convention to first fill the data
-# https://sofar.readthedocs.io/en/stable/resources/conventions.html#generalfir-1-0
+# https://sofar.readthedocs.io/en/stable/resources/conventions.html#generaltf-1-0
 
 sofa_out.Data_Real = np.real(reverberation_time.freq[np.newaxis, :])
 sofa_out.Data_Imag = np.imag(reverberation_time.freq[np.newaxis, :])
@@ -82,12 +82,12 @@ sofa_out.N = center_frequencies
 
 # %%
 # fill metadata
-# next check out the required and optional metadata for the GeneralFIR convention
+# next check out the required and optional metadata for the GeneralTF convention
 # and fill them accordingly
 
 
 # %%
-# check if sofa data are consistence and meet the standard
+# check if sofa data are consistent and meet the standard
 sofa_out.verify()
 
 

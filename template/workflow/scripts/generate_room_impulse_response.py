@@ -28,7 +28,7 @@ else:
 os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
 # %%
-# Load example RIR
+# Define room parameters and generate room impulse response
 
 room_dimensions = [7, 4, 3]  # in meters
 source_position = [6, 1.5, 1.8]  # in meters
@@ -97,7 +97,7 @@ sofa.Data_SamplingRate = noisy_room_impulse_response.sampling_rate
 
 
 # %%
-# check if sofa data are consistence and meet the standard
+# check if sofa data are consistent and meet the standard
 sofa.verify()
 
 
