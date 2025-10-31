@@ -131,3 +131,15 @@ def test_conda_env_create_dry_run(copie, copier_project_defaults):
             f"stdout: {exc.stdout}\n"
             f"stderr: {exc.stderr}",
         )
+
+@pytest.mark.parametrize("workshop_tutorial", [True, False])
+def test_tutorial_parameter_file(
+    copie, copier_project_defaults, workshop_tutorial):
+    # create project
+    copier_project_defaults["workshop_tutorial"] = workshop_tutorial
+    project = copie.copy(extra_answers=copier_project_defaults)
+
+    # test tutorial parameter file content
+    file_name = "tutorial.md"
+    assert workshop_tutorial == project.project_dir.joinpath(
+        file_name).exists()

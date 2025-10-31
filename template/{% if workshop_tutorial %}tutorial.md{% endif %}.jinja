@@ -1,0 +1,40 @@
+# Tasks
+
+This Tutorial is intended to get used to the snakemake workflow and
+Publication.
+
+## Getting used to the structure
+
+Take look at the project and get used to the structure of the scripts and rules.
+The following points could help:
+
+- generate a rule graph to look how the rules are connected
+- look at the rules to understand how they are defined and how they work
+- look at the Python scripts to understand how snakemake hands over the rule parameters
+  - by the way, snakemake can also handle R scripts and shell commands
+- execute the snakemake workflow to generate the output files defined in ``Snakefile``.
+  Hint: read the output to get an idea on how snakemake works.
+
+## Metadata and file storage
+
+SOFA is a standard format to store spatial acoustic data, such as
+room impulse responses (RIRs). Here you can find an overview of
+the [SOFA standard](https://www.sofaconventions.org/).
+
+we use [sofar](https://sofar.readthedocs.io/) to create and write SOFA files
+and create a GeneralFIR SOFA object to store the RIR and required metadata.
+
+It would be convenient to store the generated Room impulse into a sofa style
+with all required meta data.
+
+- Add these changes in the ``scripts/generate_room_impulse_response.py`` file.
+
+## Extend the workflow
+
+- add more output files, e.g. for different receiver positions on the x-Axe.
+- Extend the workflow in a way that one plot will compare different receiver positions
+
+## Publish on Zenodo
+
+- checkout the README.md, are any information missing?
+- Publish your code on Zenodo Sandbox
