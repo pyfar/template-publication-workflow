@@ -139,7 +139,12 @@ def test_tutorial_parameter_file(
     copier_project_defaults["workshop_tutorial"] = workshop_tutorial
     project = copie.copy(extra_answers=copier_project_defaults)
 
-    # test tutorial parameter file content
+    # test if tutorial.md file exists or not
     file_name = "tutorial.md"
     assert workshop_tutorial == project.project_dir.joinpath(
+        file_name).exists()
+
+    # test if Changelog file exists or not
+    file_name = "CHANGELOG.md"
+    assert workshop_tutorial != project.project_dir.joinpath(
         file_name).exists()
