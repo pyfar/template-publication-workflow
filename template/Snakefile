@@ -11,6 +11,4 @@ include: "workflow/Snakefile"
 # define rule all
 rule all:
     input:
-        "figures/shoebox_room_receiver_3_2.5_1.5.rt30.png",
-        "figures/shoebox_room_receiver_2_2.5_1.5.rt30.png",
-        # "figures/shoebox_room_receiver_4_2.5_1.5.rt30.png",
+        "figures/ShoeboxRoom_receiver_3_2_1.rt30.png",
