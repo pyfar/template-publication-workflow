@@ -1,8 +1,8 @@
 
 
-rule generate_room_impulse_response:
+rule generate_room_impulse_response_shoebox_room:
     output:
-        "resources/shoebox_room_receiver_{r_x}_{r_y}_{r_z}.rir.sofa"
+        "resources/ShoeboxRoom_receiver_{r_x}_{r_y}_{r_z}.rir.sofa"
     params:
         receiver_position_x = "{r_x}",
         receiver_position_y = "{r_y}",
