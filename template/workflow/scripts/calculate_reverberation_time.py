@@ -52,7 +52,6 @@ rir_octave = pf.dsp.filter.fractional_octave_bands(
 # Calculate energy decay curves
 
 edc = pr.energy_decay_curve_chu(rir_octave, channel_independent=True)
-# edc = pf.dsp.normalize(edc, reference_method='max')
 
 # %%
 # Calculate the reverberation time
