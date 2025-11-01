@@ -70,6 +70,10 @@ version:
             Package version should use Semantic Versioning 2.0.0 (MAJOR.MINOR.PATCH)
             {% endif %}
 
+workshop_tutorial:
+    type: bool
+    help: "Do you want to include the tutorial? It includes some tasks to get used to the workflow."
+    default: false
 
 _subdirectory: "template"
 
