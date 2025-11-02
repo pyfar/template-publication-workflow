@@ -1,0 +1,84 @@
+# Tutorial
+
+In this task you should learn how to setup a reproducible workflow.
+You can make use of
+
+- copier (which you already did),
+- conda environments,
+- snakemake workflows,
+- the Zenodo sandbox.
+
+## Context
+
+A couple of scripts representing a data-generation, analysis, and visualization pipeline are provided.
+The first script generates room impulse responses (RIRs). Think of these RIRs as the primary data you want to provide and publish as part of your dataset.
+The second script calculates the reverberation time from the RIRs and the third script creates a plot of the results. Think of this plot as the result of your analysis which is published in a manuscript to which this dataset is associated.
+
+## Tasks
+
+### Explore used to the structure
+
+Take a look at the project and get used to the structure of the scripts and rules.
+The following points could help:
+
+- Read the README.
+- Explore the directory structure and get familiar with the organization of the scripts.
+
+### Create the environment
+
+- Create and setup the environment. ``Hint:`` The `environment.yml` needs to be completed.
+- Execute the scripts to generate produce the reverberation time figure.
+
+### Explore the snakemake workflow
+
+- Generate a rule graph to look how the rules are connected.
+- Look at the rules to understand how they are defined and how they work.
+- Look at the Python scripts to understand how snakemake hands over the rule parameters.
+- Execute the snakemake workflow to generate the output files defined in ``Snakefile``.
+  Hint: read the output to get an idea on how snakemake works.
+
+### Metadata and file storage
+
+SOFA is a standardized format (AES69) to store spatial acoustic data, such as
+room impulse responses (RIRs). Here you can find an overview of
+the [SOFA standard](https://www.sofaconventions.org/).
+
+We use [sofar](https://sofar.readthedocs.io/) to create and write SOFA files
+and create a GeneralFIR SOFA object to store the RIR and required metadata.
+
+It would be convenient to store the generated Room impulse into a sofa style
+with all required meta data.
+
+- Add these changes in the ``scripts/generate_room_impulse_response.py`` file.
+
+### Complete the workflow
+
+In the scripts folder are two more scripts, which are not integrated into the workflow yet.
+
+- ``workflow/scripts/calculate_reverberation_time.py``
+  Calculates the reverberation times from the the generated room impulse responses.
+- ``workflow/scripts/plot_single_frequency_data.py``
+  Plots the reverberation times into a figure.
+
+The goal is to integrate these scripts into the snakemake workflow:
+
+- Execute both scripts manually to see what they do.
+- Allow scripts to read parameters (e.g., input_file, output_file) from Snakemake,
+  see ``workflow/scripts/generate_room_impulse_response.py`` as an example.
+- Define the rules to include both scripts into the workflow.
+- generate a rulegraph and check if everything is working as expected.
+  Don't forget to add potential new rule files in the ``workflow/Snakefile``
+- Re-run snakemake.
+- Add more output files, e.g. for different receiver positions on the x-axis.
+- Generate a rulegraph and re-run snakemake.
+
+### Bonus: Extend the workflow
+
+- Extend the workflow in a way that one plot will compare different receiver positions.
+
+### Publish on Zenodo
+
+- Checkout the README, are any information missing?
+- It might make sense to include the rulegraph.png in the README.
+- Publish your code on [Zenodo Sandbox](https://sandbox.zenodo.org/). No worries, the sandbox is for testing purpose only and you can delete the upload afterwards.
+  - You can use your GitHub account to log into Zenodo.

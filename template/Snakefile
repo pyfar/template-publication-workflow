@@ -3,12 +3,12 @@
 # the targets are defined in the rule all below.
 
 # include config file
-configfile: "config.yaml"
+# configfile: "config/config.yaml"
 
 # include workflow files
 include: "workflow/Snakefile"
 
 # define rule all
 rule all:
-    output:
-        # add your final targets here
+    input:
+        "resources/ShoeboxRoom_receiver_3_2_1.rir.sofa",

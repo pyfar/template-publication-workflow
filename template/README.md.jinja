@@ -9,7 +9,7 @@ This project implements a [snakemake](https://snakemake.readthedocs.io/) workflo
 You can create a local environment, e.g. using conda like this:
 
 ```bash
-$ conda env create -f workflow/envs/environment.yaml
+conda env create -f workflow/envs/environment.yaml
 ```
 
 ## Workflow
@@ -17,12 +17,12 @@ $ conda env create -f workflow/envs/environment.yaml
 You can create a graph representing the workflow by e.g.
 
 ```bash
-$ snakemake --rulegraph | dot -Tpng > rulegraph.png
+snakemake --rulegraph | dot -Tpng > rulegraph.png
 ```
 
 then execute the workflow
 
 ```bash
-% snakemake --cores 1 -p -n
+snakemake --cores 1 -p -n
 ```
 

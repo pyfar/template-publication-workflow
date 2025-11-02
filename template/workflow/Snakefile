@@ -1,0 +1,4 @@
+
+
+# include rules from rules
+include: "rules/generate_room_impulse_response.smk"
