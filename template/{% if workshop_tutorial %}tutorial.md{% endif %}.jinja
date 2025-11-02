@@ -66,9 +66,10 @@ The goal is to integrate these scripts into the snakemake workflow:
 - Allow scripts to read parameters (e.g., input_file, output_file) from Snakemake,
   see ``workflow/scripts/generate_room_impulse_response.py`` as an example
 - define the rules to include both scripts into the workflow
-- re-run snakemake
+- generate a rulegraph and check if everything is working as expected
+- re-run snakemake 
 - Add more output files, e.g. for different receiver positions on the x-axis.
-- re-run snakemake
+- generate a rulegraph and re-run snakemake
 
 ### Bonus: Extend the workflow
 
