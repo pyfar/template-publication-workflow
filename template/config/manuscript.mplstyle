@@ -14,7 +14,7 @@ lines.linewidth   : 1.25     # line width in points
 #lines.dash_capstyle : butt          # butt|round|projecting
 #lines.solid_joinstyle : miter       # miter|round|bevel
 #lines.solid_capstyle : projecting   # butt|round|projecting
-#lines.antialiased : True         # render lines in antialised (no jaggies)
+#lines.antialiased : True         # render lines in antialiased (no jaggies)
 
 ### FONT
 #
