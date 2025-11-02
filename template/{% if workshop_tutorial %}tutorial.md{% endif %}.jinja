@@ -43,7 +43,7 @@ SOFA is a standardized format (AES69) to store spatial acoustic data, such as
 room impulse responses (RIRs). Here you can find an overview of
 the [SOFA standard](https://www.sofaconventions.org/).
 
-we use [sofar](https://sofar.readthedocs.io/) to create and write SOFA files
+We use [sofar](https://sofar.readthedocs.io/) to create and write SOFA files
 and create a GeneralFIR SOFA object to store the RIR and required metadata.
 
 It would be convenient to store the generated Room impulse into a sofa style
@@ -62,15 +62,15 @@ In the scripts folder are two more scripts, which are not integrated into the wo
 
 The goal is to integrate these scripts into the snakemake workflow:
 
-- Execute both scripts manually to see what they do
+- Execute both scripts manually to see what they do.
 - Allow scripts to read parameters (e.g., input_file, output_file) from Snakemake,
-  see ``workflow/scripts/generate_room_impulse_response.py`` as an example
-- define the rules to include both scripts into the workflow
+  see ``workflow/scripts/generate_room_impulse_response.py`` as an example.
+- Define the rules to include both scripts into the workflow.
 - generate a rulegraph and check if everything is working as expected.
   Don't forget to add potential new rule files in the ``workflow/Snakefile``
-- re-run snakemake 
+- Re-run snakemake.
 - Add more output files, e.g. for different receiver positions on the x-axis.
-- generate a rulegraph and re-run snakemake
+- Generate a rulegraph and re-run snakemake.
 
 ### Bonus: Extend the workflow
 
@@ -81,4 +81,4 @@ The goal is to integrate these scripts into the snakemake workflow:
 - Checkout the README, are any information missing?
 - It might make sense to include the rulegraph.png in the README.
 - Publish your code on [Zenodo Sandbox](https://sandbox.zenodo.org/). No worries, the sandbox is for testing purpose only and you can delete the upload afterwards.
-  - You can use your GitHub account.
+  - You can use your GitHub account to log into Zenodo.
