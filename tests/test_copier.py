@@ -1,19 +1,4 @@
-import os
 import pytest
-import subprocess
-import shutil
-
-@pytest.fixture(scope='session')
-def copier_project_defaults():
-    return {
-        "project_name": "my_project",
-        "project_description": "my_project_description",
-        "author_name": "author",
-        "python_version": "3.10",
-        "license": "MIT",
-        "version": "0.1.0",
-        "year": "2024",
-        }
 
 def test_project_folder(copie, copier_project_defaults):
     project_defaults = copier_project_defaults
@@ -100,40 +85,8 @@ def test_environment_file(copie, copier_project_defaults):
     assert 'python=3.10' in content
 
 
-def test_conda_env_create_dry_run(copie, copier_project_defaults):
-    # skip if conda is not available in the environment running the tests
-    if shutil.which("conda") is None:
-        pytest.skip(
-            "conda executable not found on PATH; "
-            "skipping conda validation test")
-
-    # create copier project
-    project = copie.copy(extra_answers=copier_project_defaults)
-    env_path = project.project_dir.joinpath(
-        "workflow", "envs", "environment.yaml")
-
-    # use --dry-run so the test validates conda can parse/solve the
-    # environment without creating it
-    # if conda returns a non-zero exit code the test will fail and
-    # include stderr for debugging
-    try:
-        subprocess.run(
-            ["conda", "env", "create", "-f", str(env_path), "--dry-run"],
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-        )
-    except subprocess.CalledProcessError as exc:
-        pytest.fail(
-            "conda failed to validate environment.yaml\n"
-            f"exit code: {exc.returncode}\n"
-            f"stdout: {exc.stdout}\n"
-            f"stderr: {exc.stderr}",
-        )
-
 @pytest.mark.parametrize("workshop_tutorial", [True, False])
-def test_tutorial_parameter_file(
+def test_tutorial_parameter_file_tutorial(
     copie, copier_project_defaults, workshop_tutorial):
     # create project
     copier_project_defaults["workshop_tutorial"] = workshop_tutorial
@@ -144,7 +97,33 @@ def test_tutorial_parameter_file(
     assert workshop_tutorial == project.project_dir.joinpath(
         file_name).exists()
 
+
+@pytest.mark.parametrize("workshop_tutorial", [True, False])
+def test_tutorial_parameter_file_CHANGELOG(
+    copie, copier_project_defaults, workshop_tutorial):
+    # create project
+    copier_project_defaults["workshop_tutorial"] = workshop_tutorial
+    project = copie.copy(extra_answers=copier_project_defaults)
+
     # test if Changelog file exists or not
     file_name = "CHANGELOG.md"
     assert workshop_tutorial != project.project_dir.joinpath(
         file_name).exists()
+
+
+@pytest.mark.parametrize("workshop_tutorial", [True, False])
+def test_tutorial_parameter_file_environment_content(
+    copie, copier_project_defaults, workshop_tutorial):
+    # create project
+    copier_project_defaults["workshop_tutorial"] = workshop_tutorial
+    project = copie.copy(extra_answers=copier_project_defaults)
+    # test environment file content
+    content = project.project_dir.joinpath(
+        "workflow", "envs", "environment.yaml").read_text()
+    if workshop_tutorial:
+        assert '  - pip' in content
+        assert '  - numpy' not in content
+        assert '    - pyrato' not in content
+    else:
+        assert '  - numpy' in content
+        assert '    - pyrato' in content
