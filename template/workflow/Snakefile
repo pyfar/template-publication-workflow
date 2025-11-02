@@ -2,5 +2,3 @@
 
 # include rules from rules
 include: "rules/generate_room_impulse_response.smk"
-include: "rules/calculate_reverberation_time.smk"
-include: "rules/plot_single_frequency_data.smk"
