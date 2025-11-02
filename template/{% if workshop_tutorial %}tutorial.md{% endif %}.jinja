@@ -51,9 +51,27 @@ with all required meta data.
 
 - Add these changes in the ``scripts/generate_room_impulse_response.py`` file.
 
-### Extend the workflow
+### Complete the workflow
 
+In the scripts folder are two more scripts, which are not integrated into the workflow yet.
+
+- ``workflow/scripts/calculate_reverberation_time.py``
+  Calculates the reverberation times from the the generated room impulse responses.
+- ``workflow/scripts/plot_single_frequency_data.py``
+  Plots the reverberation times into a figure.
+
+The goal is to integrate these scripts into the snakemake workflow:
+
+- Execute both scripts manually to see what they do
+- Allow scripts to read parameters (e.g., input_file, output_file) from Snakemake,
+  see ``workflow/scripts/generate_room_impulse_response.py`` as an example
+- define the rules to include both scripts into the workflow
+- re-run snakemake
 - Add more output files, e.g. for different receiver positions on the x-axis.
+- re-run snakemake
+
+### Bonus: Extend the workflow
+
 - Extend the workflow in a way that one plot will compare different receiver positions.
 
 ### Publish on Zenodo

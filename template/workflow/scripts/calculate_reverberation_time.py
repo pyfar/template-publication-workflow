@@ -6,22 +6,9 @@ import pyfar as pf
 import pyrato as pr
 import os
 
-
-try: 
-    snakemake_exists = hasattr(snakemake, 'input')
-except NameError:
-
-    snakemake_exists = False
-
-if not snakemake_exists:
-    input_file = os.path.join('..', '..', 'resources', 'ShoeboxRoom_receiver_3_2_1.rir.sofa')
-    output_file = os.path.join('..', '..', 'results', 'ShoeboxRoom_receiver_3_2_1.rt30.csv')
-    rt = '30'
-
-else:
-    input_file = snakemake.input[0]
-    output_file = snakemake.output[0]
-    rt = snakemake.params.rt
+input_file = os.path.join('..', '..', 'resources', 'ShoeboxRoom_receiver_3_2_1.rir.sofa')
+output_file = os.path.join('..', '..', 'results', 'ShoeboxRoom_receiver_3_2_1.rt30.csv')
+rt = '30'
 
 # %%
 # Create output folder

@@ -15,5 +15,5 @@ dependencies:
   - snakemake
   - pydot
   - pip:
-    - pyfar
-{% if workshop_tutorial == false %}   - pyrato{% endif %}
+    - pyfar{% if workshop_tutorial == false %}
+    - pyrato{% endif %}
