@@ -5,16 +5,15 @@ channels:
 dependencies:
   - python={{python_version}}
   - pip
-  - pyflakes
+  - pyflakes{% if workshop_tutorial == false %}
   - numpy
   - scipy
-  - matplotlib
+  - matplotlib{% endif %}
   - ipython
   - ipykernel
   - ipympl
   - snakemake
-  - dot
+  - pydot
   - pip:
     - pyfar
-    - pyrato
-
+{% if workshop_tutorial == false %}   - pyrato{% endif %}
