@@ -9,6 +9,9 @@ input_file = os.path.join('..', '..', 'results', 'ShoeboxRoom_receiver_3_2_1.rt3
 output_file = os.path.join('..', '..', 'results', 'ShoeboxRoom_receiver_3_2_1.rt30.png')
 
 # %%
+# Set the plot style for a manuscript (sets font sizes, latex rendering, etc..)
+plt.style.use('../../config/manuscript.mplstyle')
+# %%
 # Create output folder
 os.makedirs(os.path.dirname(output_file), exist_ok=True)
 
