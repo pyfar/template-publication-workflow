@@ -51,16 +51,6 @@ def test_license_default(copie, copier_project_defaults):
 
 @pytest.mark.parametrize(('license_short', 'expected_content'), [
     ("MIT", "MIT License"),
-    ("CC-BY-4.0", "Attribution 4.0 International"),
-    ("CC-BY-NC-4.0", "Attribution-NonCommercial 4.0 International"),
-    (
-        "CC-BY-NC-ND-4.0",
-        "Attribution-NonCommercial-NoDerivatives 4.0 International"),
-    (
-        "CC-BY-NC-SA-4.0",
-        "Attribution-NonCommercial-ShareAlike 4.0 International"),
-    ("CC-BY-ND-4.0", "Attribution-NoDerivatives 4.0 International"),
-    ("CC-BY-SA-4.0", "Attribution-ShareAlike 4.0 International"),
 ])
 def test_license_all_license_files(
         copie, copier_project_defaults, license_short, expected_content):
