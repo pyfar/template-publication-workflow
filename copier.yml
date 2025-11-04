@@ -36,7 +36,7 @@ python_version:
 license:
     type: str
     help: |
-        Which license do you want to use? Includes a LICENSE file in the repository root.
+        Which license do you want to use for the code? Includes a LICENSE file in the repository root.
         For more information, see:
         - https://www.pyopensci.org/python-package-guide/documentation/repository-files/license-files.html
         - https://opensource.org/licenses
@@ -48,12 +48,6 @@ license:
         "Copyleft - GPL-3.0": "GPL-3.0-only"
         "Copyleft - EUPL-1.2": "EUPL-1.2"
         "Intermediate - MPL-2.0": "MPL-2.0"
-        "CC BY 4.0": "CC-BY-4.0"
-        "CC BY-NC 4.0": "CC-BY-NC-4.0"
-        "CC BY-NC-ND 4.0": "CC-BY-NC-ND-4.0"
-        "CC BY-NC-SA 4.0": "CC-BY-NC-SA-4.0"
-        "CC BY-ND 4.0": "CC-BY-ND-4.0"
-        "CC BY-SA 4.0": "CC-BY-SA-4.0"
     default: MIT
 
 project_slug:
